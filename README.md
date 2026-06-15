@@ -96,6 +96,27 @@ For a full Chinese water report or course design, the intended flow is:
    `\tableofcontents`, integrates the real school cover when provided, and
    compiles PDF when possible.
 
+## School Deliverable Mode
+
+The primary use case is Chinese university 课程设计, 毕业设计, and
+毕业论文/课程论文, where the teacher supplies a fixed four-piece set: 任务书 (task
+book), 指导书 (guidance book), 格式要求 (format spec), and 成果封面 (cover). The
+router classifies each piece before any writing, then splits work by track:
+
+- Design track (课程设计 / 毕业设计) is calculation-dominant. PaperSpine owns the
+  large share — it locks 设计依据/数据 from the 任务书 and 章节序/计算步骤 from the
+  指导书, runs and audits 设计计算 with the `公式 → 代入 → 结果 → 判断` chain, and
+  registers the 图纸 list; Nature writing then drafts the 设计说明书 prose.
+- Paper track (毕业论文 / 课程论文) is prose-dominant. Nature writing owns 引言,
+  讨论, and 机理叙述 and pulls nature-citation, while PaperSpine owns data,
+  calculations, structure, and citation planning.
+
+Domain values — 高程基准, 工程等别/建筑物级别, 设计/校核洪水标准, 规范, parameters,
+and formulas — always come from the 任务书/指导书/资料, never from a built-in
+default; when the materials are silent the router asks or carries a labelled
+assumption. Before delivery, a 成果清单 gate re-checks the 任务书 deliverable list
+(设计说明书, 计算书, 图纸, 附表) and confirms the 格式要求 contract is applied.
+
 ## Validation
 
 Before release, check:
