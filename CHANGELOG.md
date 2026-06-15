@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-06-15 calculation-depth discipline from a first real run
+
+Lessons distilled from the MJ19 bank-protection course design, where the report
+was honest and arithmetic-correct but engineering-thin because missing inputs
+were deferred instead of computed.
+
+- Authorize assumption-driven calculation: when a design-driving value is missing
+  from the materials, compute with a labelled assumption (assumed value + basis +
+  teacher-confirmation flag) instead of deferring the whole chain. "Do not
+  fabricate" and "still produce the calculation" now hold together.
+- Add a minimum calculation-depth gate for design tasks. A 设计 report must
+  attempt the object's full chain (for 护岸: 水力 → 冲刷 → 护脚埋深 → 边坡稳定 →
+  反滤 → 工程量); deferring every load-bearing calculation is a depth defect, not
+  neutral scoping. Only the specific unresolved item may be deferred.
+- Require a quantified economic dimension in 方案比选 when the 任务书 names one —
+  order-of-magnitude 工程量/造价 per scheme, not adjectives alone.
+- Make 三线表 the default report table style (router Output Contract and the core
+  tables rule), verified at final assembly.
+- Treat repeated defensive commentary about the report's own calculation depth as
+  an AI-structure defect; state scope and limitations once as a boundary.
+- Router gains matching Failure Modes and a 计算深度门 in the Completion Gate; the
+  hydraulic engineering core gains the assumption, minimum-chain, economic, and
+  三线表 rules in its calculations and anti-AI sections.
+
 ## 2026-06-15 school-deliverable routing and single-source consolidation
 
 - Add a School Deliverable Mode for Chinese 课程设计, 毕业设计, and

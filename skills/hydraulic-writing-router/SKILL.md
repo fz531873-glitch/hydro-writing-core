@@ -48,6 +48,10 @@ avoids a fragile final conversion step.
 - Cover: a cover is a real asset. Defer integration until final formatting and
   ask the user for the exact cover image/PDF/template path; never hand-imitate a
   cover or TOC from memory.
+- Tables: default to 三线表 (top, header, and bottom rules only; no vertical
+  rules) for Chinese water reports unless the 格式要求 says otherwise. A Markdown
+  content draft may use pipe tables, but final assembly must render them as
+  三线表 and verify it in the PDF.
 
 Ownership is unchanged by this preference: PaperSpine owns source mapping,
 chapter duties, audits, calculations, template constraints, and final artifact
@@ -108,6 +112,14 @@ track.
   the values — every datum (高程基准), 工程等别/建筑物级别, 设计/校核洪水标准, 规范,
   parameter, and formula comes from the 任务书/指导书/资料, never from a built-in
   default.
+- Calculation depth: attempt the object's minimum calculation chain, e.g. for
+  护岸 `水力(流速/水深) → 冲刷深度 → 护脚埋深 → 边坡稳定 → 反滤 → 工程量`. When a
+  design-driving value is missing from the materials, do not defer the whole
+  chain — compute with a labelled assumption (assumed value + basis such as a
+  规范 typical value or 工程类比 + teacher-confirmation flag) and defer only the
+  specific unresolved item.
+- Scheme comparison: when the 任务书 names an economic dimension, the 比选 must
+  carry at least order-of-magnitude 工程量/造价 per scheme, not adjectives alone.
 
 Paper track (毕业论文 / 课程论文) — prose + evidence dominant.
 
@@ -123,8 +135,10 @@ Paper track (毕业论文 / 课程论文) — prose + evidence dominant.
 2. Lock — PaperSpine fixes 设计依据/数据 (任务书), 章节序/计算步骤 (指导书),
    calculation boundaries, table list, and 图纸 list.
 3. Compute — load the hydraulic core audit checklist first (it will not
-   auto-load), then PaperSpine runs/audits 设计计算; keep calc chains and units
-   auditable; recompute conclusion-bearing numbers.
+   auto-load), then PaperSpine runs/audits the minimum 设计计算 chain; keep calc
+   chains and units auditable; recompute conclusion-bearing numbers; fill missing
+   design-driving values with labelled assumptions rather than deferring the
+   whole chain.
 4. Draft — Nature writing drafts the 设计说明书 body section by section from the
    locked boundary.
 5. Polish — Nature polishing for coursework voice and anti-AI regularity.
@@ -188,6 +202,10 @@ Treat these as defects:
 - Letting a 师兄样本/同组报告/范例 supply final data, parameters, formulas, wording, or conclusions instead of structure only.
 - Injecting a default 规范/datum/工程等别/洪水标准/parameter/formula instead of taking it from the 任务书/指导书/资料 (or asking when the materials are silent).
 - Auditing 设计计算 or hydraulic claims without first loading the hydraulic core; it does not arrive via Nature `always_load`.
+- Deferring the whole 设计计算 chain (冲刷/护脚埋深/边坡稳定/工程量) instead of computing it with labelled assumptions where a value is missing.
+- Comparing schemes only with adjectives when the 任务书 names an economic dimension, with no quantified 工程量/造价.
+- Repeating defensive commentary about the report's own calculation depth across sections instead of stating limitations once as a boundary.
+- Rendering tables as bordered/grid tables in the final report when the 格式要求 asks for 三线表.
 - Running full PaperSpine for a small local wording patch.
 - Treating missing calculation/source/template evidence as a polish problem.
 - Skipping Nature writing/polishing on a full Chinese water course report after the calculations and chapter duties are stable.
@@ -207,6 +225,7 @@ Treat these as defects:
 - Content review: inspect the Markdown/source text directly and confirm chapter logic, calculations, tables, conclusions, and missing inputs before final formatting. Once confirmed, create or mark `confirmed_content.md`.
 - LaTeX/PDF: after `confirmed_content.md` exists, inspect `final_paper/main.tex`, require a native `\tableofcontents` when a table of contents is needed, run the LaTeX guard when available, compile PDF when a TeX engine exists, and confirm source-format requirements from the materials are reflected or explicitly recorded as unmappable.
 - PPT/Excel/PDF: inspect the actual artifact structure, not just file existence.
-- 成果清单回检: for 课程设计/毕业设计, map the final deliverables back to the 任务书 成果清单 and report any missing item (设计说明书, 计算书, 图纸, 附表). Confirm the 格式要求 contract is applied or explicitly recorded as unmappable.
+- 成果清单回检: for 课程设计/毕业设计, map the final deliverables back to the 任务书 成果清单 and report any missing item (设计说明书, 计算书, 图纸, 附表). Confirm the 格式要求 contract is applied or explicitly recorded as unmappable, including 三线表 rendering for report tables.
+- 计算深度门: for 设计 tasks, confirm the object's minimum calculation chain was attempted (e.g. 护岸: 水力 → 冲刷 → 护脚埋深 → 边坡稳定 → 反滤 → 工程量); each gap must be a labelled assumption or an explicit single-item deferral, never a whole-chain deferral. When the 任务书 names an economic dimension, the 比选 carries quantified 工程量/造价.
 - Calculations/tables: recompute when numbers support conclusions.
 - Water decisions: keep `formula -> substitution -> result -> design judgment` visible when a calculation drives the judgment.

@@ -122,6 +122,10 @@ stable.
   the source is an official-policy document and that register is required.
 - Reduce repeated openings such as `本文通过`, `本文构建`, `首先`, `其次`,
   `综上`. Let the object, condition, result, or comparison carry the transition.
+- Do not pad the body with defensive commentary about the report's own depth or
+  limitations (`本报告计算深度定位为...`, `尚不能替代...`, repeated across
+  sections). State scope and limitations once as a boundary; spreading
+  self-justification across sections is an AI-structure tell, not rigor.
 
 ## Evidence And Data Discipline
 
@@ -155,6 +159,23 @@ an auditable path from source to number to judgment.
 - Show the calculation chain when a number supports a decision:
   `formula -> substitution -> result -> judgment`. One full worked example plus
   a verified table is acceptable for repeated rows.
+- When a design-driving quantity is missing, prefer a labelled-assumption
+  calculation over deferral. State the assumed value, its basis (a code typical
+  value, engineering analogy, or measured analogue), and a confirmation flag,
+  then carry the calculation through. Do not present an assumed value as if
+  measured, but do not defer an entire calculation chain when a labelled
+  assumption can advance it.
+- For a design object, attempt the full minimum chain rather than isolated
+  subtractions — e.g. for bank protection `hydraulics (velocity/depth) -> scour
+  depth -> toe embedment -> slope stability -> filter/drainage -> quantities`.
+  Deferring every load-bearing calculation to a later stage is a depth defect,
+  not a neutral scoping choice; defer only the specific unresolved item.
+- When a 方案比选 includes an economic dimension, support it with at least
+  order-of-magnitude quantities or cost per scheme; an all-adjective comparison
+  is not evidence.
+- Render report tables as 三线表 (top, header, and bottom rules only) unless a
+  template requires otherwise. A Markdown draft may use pipe tables, but the
+  formal water report should not default to vertical rules or full grids.
 - Keep units, datum, object, period, scenario, and calculation basis explicit.
   Different values may coexist when their bases differ; unexplained drift for
   the same object and basis is a defect.
