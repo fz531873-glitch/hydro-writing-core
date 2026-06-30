@@ -121,6 +121,10 @@ $Mappings = @(
         Target = ".codex\skills\hydraulic-writing-router\agents\openai.yaml"
     },
     @{
+        Source = "skills\hydraulic-writing-router\scripts\template_follow_map_guard.py"
+        Target = ".codex\skills\hydraulic-writing-router\scripts\template_follow_map_guard.py"
+    },
+    @{
         Source = "skills\nature-polishing\static\core\hydraulic-engineering.md"
         Target = ".codex\skills\nature-polishing\static\core\hydraulic-engineering.md"
     }

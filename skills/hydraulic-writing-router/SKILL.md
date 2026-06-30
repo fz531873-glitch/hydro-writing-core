@@ -92,6 +92,44 @@ Anything else (师兄样本, 同组报告, 范例) is a structure-only exemplar 
 source: it may teach chapter order and formatting habit, but must not supply
 final data, formulas, parameters, wording, or conclusions.
 
+### Template Follow Gate
+
+When a strong exemplar is supplied (师兄样本, 同组报告, 优秀模板, 范例,
+winning report, or model answer), create
+`paper_rewriting_output/template_follow_map.md` before drafting body prose. This
+gate prevents superficial template use: every usable exemplar paragraph, table,
+formula block, caption, method step, result claim, comparison move, limitation,
+or conclusion rhythm needs a handling row.
+
+Use the task book and guidance book as hard constraints; use the exemplar as a
+unit-by-unit structure guide. The final text may follow the exemplar's writing
+move, order, table shape, formula placement, and evidence-to-judgment rhythm,
+but it must replace the exemplar's project object, data, parameters, formula
+basis, results, conclusions, recommendations, and distinctive wording with the
+user's own requirement/evidence sources.
+
+Required table:
+
+```markdown
+| Row ID | Exemplar Anchor | Exemplar Unit Function | Followable Move | Must Replace / Prohibited Transfer | User/Task Evidence Anchor | Target Landing Place | Handling Status | Reason / Final Check |
+|---|---|---|---|---|---|---|---|---|
+| T1 | sample.docx §1 第1段 | Opens from broad context to assigned object. | Keep the context-to-object narrowing sequence. | Replace project name, background facts, and conclusion wording. | 任务书 P.1 题目；本人资料 §背景 | draft §1 第1段 | follow | Final paragraph names the user's object and does not reuse sample wording. |
+| T2 | sample.docx 表2 | Summarizes input data before calculation. | Keep table role, field order, and placement before method. | Replace all values, units, group labels, and footnotes unless supported by task data. | 分组表 Sheet1 rows 3-8 | 表2-1 | rebuild_with_user_data | Read back numbers against user data. |
+```
+
+Allowed statuses: `follow`, `rebuild_with_user_data`, `style_only`,
+`not_applicable`, `conflict`, `needs_confirmation`.
+
+- `follow` and `rebuild_with_user_data` require a user/task evidence anchor.
+- `not_applicable`, `conflict`, and `needs_confirmation` require a reason.
+- Do not collapse a whole exemplar section into one row when it contains
+  different functions.
+- Do not skip an exemplar unit silently. If it cannot be used, record why.
+- After creating the map, run
+  `scripts/template_follow_map_guard.py`. After drafting, run the base
+  PaperSpine `template_leak_guard.py` when both exemplar and final text are
+  available.
+
 ### Two Tracks
 
 Split by deliverable type; the PaperSpine:Nature balance differs.
@@ -186,7 +224,8 @@ silently drop drawing deliverables.
   格式要求 = format contract, 封面 = asset). Structure-only exemplars may teach
   chapter order, calculation sequence, table/formula placement, and formatting
   habits, but they must not supply final data, formulas, parameters, wording,
-  conclusions, or recommendations.
+  conclusions, or recommendations. When such an exemplar is supplied, close the
+  Template Follow Gate before body drafting.
 
 ## Failure Modes
 
@@ -200,6 +239,10 @@ Treat these as defects:
 - Delivering a 设计 task without checking the final output against the 任务书 成果清单.
 - Dropping required 图纸 deliverables or failing to register them in the 成果清单.
 - Letting a 师兄样本/同组报告/范例 supply final data, parameters, formulas, wording, or conclusions instead of structure only.
+- Using an excellent template only for surface formatting, or skipping usable
+  exemplar units without `template_follow_map.md`.
+- Marking an exemplar row as `follow` while leaving its user/task evidence
+  anchor empty.
 - Injecting a default 规范/datum/工程等别/洪水标准/parameter/formula instead of taking it from the 任务书/指导书/资料 (or asking when the materials are silent).
 - Auditing 设计计算 or hydraulic claims without first loading the hydraulic core; it does not arrive via Nature `always_load`.
 - Deferring the whole 设计计算 chain (冲刷/护脚埋深/边坡稳定/工程量) instead of computing it with labelled assumptions where a value is missing.
@@ -226,6 +269,12 @@ Treat these as defects:
 - LaTeX/PDF: after `confirmed_content.md` exists, inspect `final_paper/main.tex`, require a native `\tableofcontents` when a table of contents is needed, run the LaTeX guard when available, compile PDF when a TeX engine exists, and confirm source-format requirements from the materials are reflected or explicitly recorded as unmappable.
 - PPT/Excel/PDF: inspect the actual artifact structure, not just file existence.
 - 成果清单回检: for 课程设计/毕业设计, map the final deliverables back to the 任务书 成果清单 and report any missing item (设计说明书, 计算书, 图纸, 附表). Confirm the 格式要求 contract is applied or explicitly recorded as unmappable, including 三线表 rendering for report tables.
+- 模板跟随门: when a structure-only exemplar is supplied,
+  `template_follow_map.md` exists, passes `template_follow_map_guard.py`, and
+  every usable exemplar unit is either followed, rebuilt with user data,
+  style-only, not applicable, conflicting, or awaiting confirmation with a
+  reason. Final text must pass a template-leak check when the exemplar and final
+  text are both available.
 - 计算深度门: for 设计 tasks, confirm the object's minimum calculation chain was attempted (e.g. 护岸: 水力 → 冲刷 → 护脚埋深 → 边坡稳定 → 反滤 → 工程量); each gap must be a labelled assumption or an explicit single-item deferral, never a whole-chain deferral. When the 任务书 names an economic dimension, the 比选 carries quantified 工程量/造价.
 - Calculations/tables: recompute when numbers support conclusions.
 - Water decisions: keep `formula -> substitution -> result -> design judgment` visible when a calculation drives the judgment.

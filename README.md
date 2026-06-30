@@ -22,13 +22,15 @@ LaTeX source, calculations, tables, and evidence.
 
 ## What It Installs
 
-Only three files are installed into the active Codex skill tree:
+The installer copies the hydro router, its UI metadata, its local guard script,
+and the hydraulic engineering core into the active Codex skill tree:
 
 ```text
 skills/
   hydraulic-writing-router/
     SKILL.md
     agents/openai.yaml
+    scripts/template_follow_map_guard.py
   nature-polishing/
     static/core/hydraulic-engineering.md
 ```
@@ -84,14 +86,19 @@ For a full Chinese water report or course design, the intended flow is:
    structure-only exemplar, reference, or unsafe/unknown.
 2. PaperSpine closes chapter duties, calculation boundaries, required tables,
    format requirements, and missing-input notes.
-3. Nature writing drafts or rebuilds the body sections from the confirmed
+3. If an excellent template, senior sample, same-group report, or model answer
+   is supplied, create `template_follow_map.md`: each usable exemplar unit is
+   either followed, rebuilt with the user's data, used as style-only, excluded
+   with reason, marked conflict, or marked needs-confirmation. Run
+   `template_follow_map_guard.py` before drafting.
+4. Nature writing drafts or rebuilds the body sections from the confirmed
    evidence boundary.
-4. Nature polishing improves paragraph logic, density, and Chinese coursework
+5. Nature polishing improves paragraph logic, density, and Chinese coursework
    voice while keeping the hydraulic engineering guardrails active.
-5. The user reviews content in Markdown or source text. No format conversion is
+6. The user reviews content in Markdown or source text. No format conversion is
    used for content inspection.
-6. After confirmation, the accepted content becomes `confirmed_content.md`.
-7. PaperSpine LaTeX assembly turns `confirmed_content.md` into
+7. After confirmation, the accepted content becomes `confirmed_content.md`.
+8. PaperSpine LaTeX assembly turns `confirmed_content.md` into
    `paper_rewriting_output/final_paper/main.tex`, uses native
    `\tableofcontents`, integrates the real school cover when provided, and
    compiles PDF when possible.
@@ -127,5 +134,8 @@ Before release, check:
 - The router mentions `confirmed_content.md`,
   `paper_rewriting_output/final_paper/main.tex`, native `\tableofcontents`,
   and the ban on conversion/rendering for content inspection.
+- The router mentions `template_follow_map.md`, and
+  `template_follow_map_guard.py` rejects empty evidence anchors, copied wording
+  moves, invalid statuses, and vague replacement boundaries.
 - The repository contains no unused skill overlays that could override base
   PaperSpine or Nature behavior.

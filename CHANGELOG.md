@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-06-30 template-follow gate for excellent samples
+
+- Add a Template Follow Gate to the hydraulic router for 师兄样本, 同组报告,
+  优秀模板, 范例, winning reports, and model answers.
+- Require `paper_rewriting_output/template_follow_map.md` before body drafting
+  when a structure-only exemplar is supplied. Each exemplar unit must be
+  followed, rebuilt with user data, used as style-only, excluded with reason,
+  marked conflict, or marked needs-confirmation.
+- Make task books and guidance books hard constraints while allowing templates
+  to control writing moves, table shape, formula placement, and
+  evidence-to-judgment rhythm.
+- Add `scripts/template_follow_map_guard.py` to reject invalid statuses, empty
+  user/task evidence anchors, copied-wording moves, and vague replacement
+  boundaries.
+- Update installer and README so the guard script is installed with the hydro
+  router.
+
 ## 2026-06-15 calculation-depth discipline from a first real run
 
 Lessons distilled from the MJ19 bank-protection course design, where the report
